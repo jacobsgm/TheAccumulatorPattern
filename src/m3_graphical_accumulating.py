@@ -192,14 +192,12 @@ def draw_lines(n, point, window):
     alteredy = y-100
     for i in range(n):
 
-        # alteredy = alteredy + (200/n)*i
         point = rg.Point(x, y)
         point2 = rg.Point(x + 100, alteredy+((200/(n-1)))*i)
         line = rg.Line(point, point2)
         line.attach_to(window)
 
     window.render()
-    print(point2)
 
 
 
