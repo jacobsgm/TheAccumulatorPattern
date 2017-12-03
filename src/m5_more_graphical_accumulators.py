@@ -9,8 +9,8 @@ Additionally, it emphasizes that you must
 before you can implement a solution to the problem in Python. 
   
 Authors: David Mutchler, Dave Fisher, Valerie Galluzzi, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and Garrett Jacobs.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -98,7 +98,7 @@ def draw_squares_from_circle(n, circle, window):
       :type window: rg.RoseWindow
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #          Tests have been written for you (above).
     #
     # CONSIDER using the ACCUMULATOR IN GRAPHICS pattern,
@@ -111,6 +111,23 @@ def draw_squares_from_circle(n, circle, window):
     #          ** FIRST DO A CONCRETE EXAMPLE BY HAND! **
     ####################################################################
     # ------------------------------------------------------------------
+
+    circle.attach_to(window)
+    square = rg.Square(rg.Point(circle.center.x,circle.center.y), circle.radius*2)
+    square.attach_to(window)
+    window.render()
+
+    x= square.center.x
+    y= square.center.y
+
+    for _ in range(n-1):
+
+        x += circle.radius
+        y += circle.radius
+        square = rg.Square(rg.Point(x,y),circle.radius*2)
+        square.attach_to(window)
+
+    window.render()
 
 
 def run_test_draw_circles_from_rectangle():
@@ -135,6 +152,25 @@ def run_test_draw_circles_from_rectangle():
     ####################################################################
     # ------------------------------------------------------------------
 
+    title = 'Tests 1 and 2 of DRAW_CIRCLES_FROM_RECTANGLE: '
+    title = title + ' 4 circles from green rectangle, 5 smaller circles from rectangle'
+    window1 = rg.RoseWindow(720, 500, title)
+
+    rectangle = rg.Rectangle(rg.Point(400,250), rg.Point(440,325))
+    rectangle.fill_color = 'green'
+    draw_circles_from_rectangle(4,5, rectangle, window1)
+
+    rectangle = rg.Rectangle(rg.Point(600,450), rg.Point(640,525))
+    rectangle.fill_color = 'green'
+    draw_circles_from_rectangle(7,10, rectangle, window1)
+
+    title = 'Tests 3 of DRAW_CIRCLES_FROM_RECTANGLE: '
+    title = title + ' 4 circles from green rectangle, 5 smaller circles from rectangle'
+    window2 = rg.RoseWindow(720, 500, title)
+
+    rectangle = rg.Rectangle(rg.Point(400,250), rg.Point(440,325))
+    rectangle.fill_color = 'green'
+    draw_circles_from_rectangle(4,5, rectangle, window2)
 
 def draw_circles_from_rectangle(m, n, rectangle, window):
     """
@@ -189,6 +225,27 @@ def draw_circles_from_rectangle(m, n, rectangle, window):
     #          ** FIRST DO A CONCRETE EXAMPLE BY HAND! **
     ####################################################################
     # ------------------------------------------------------------------
+
+    rectangle.attach_to(window)
+
+    x = rectangle.get_width()
+    y = rectangle.get_height()
+
+    window.render()
+
+    z= rectangle.get_upper_left_corner().x - (y/2)
+    for _ in range(m):
+        circle = rg.Circle(rg.Point(z, rectangle.get_upper_left_corner().y + (y/2)),(y/2))
+        z = z- 2*(y/2)
+        circle.attach_to(window)
+
+    q =  rectangle.get_upper_left_corner().y - (x/2)
+    for t in range(n):
+        circle = rg.Circle(rg.Point(rectangle.get_upper_left_corner().x +(x/2),q),(x/2))
+        q = q - 2*(x/2)
+        circle.attach_to(window)
+
+    window.render()
 
 
 def run_test_draw_lines_from_rectangles():
