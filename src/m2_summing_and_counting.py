@@ -70,13 +70,13 @@ def run_test_sum_more_cosines():
     # Below this comment, add 2 more test cases of your own choosing.
     # ------------------------------------------------------------------
 
-    expected = 0.7243518
+    expected = -0.8159504818
     answer = sum_more_cosines(2, 6)
     print('Test 2 expected:', expected, '(approximately)')
     print('       actual:  ', answer)
 
-    expected = -0.41744
-    answer = sum_more_cosines(1, 10)
+    expected = 0.02082
+    answer = sum_more_cosines(-4, 1)
     print('Test 3 expected:', expected, '(approximately)')
     print('       actual:  ', answer)
 
@@ -110,8 +110,8 @@ def sum_more_cosines(m, n):
     # ------------------------------------------------------------------
 
     total = 0
-    for m in range(n+1):
-        total = total + (math.cos(m))
+    for i in range(n-m+1):
+        total = total + (math.cos(i+m))
 
     return total
 
