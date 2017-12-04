@@ -344,13 +344,30 @@ def draw_lines_from_rectangles(rectangle1, rectangle2, n, window):
     rectangle1.attach_to(window)
     rectangle2.attach_to(window)
 
-    x = rectangle1.get_width()
-    y = rectangle1.get_height()
-    a = rectangle2.get_width()
-    b = rectangle2.get_width()
+    a = rectangle1.get_width()
+    b = rectangle1.get_height()
 
-    line = rg.Line(rectangle1.center,rectangle2.center)
-    line.attach_to(window)
+
+    lineStart = (rectangle1.get_center())
+    lineEnd = (rectangle2.get_center())
+
+    for i in range(n):
+        line = rg.Line(lineStart,lineEnd)
+        line.thickness=5
+        lineStart.y += b/2
+        lineStart.x -= a/2
+        lineEnd.y += b/2
+        lineEnd.x -= a/2
+
+
+        if (i % 2 == 0):
+            line.color = rectangle1.outline_color
+            line.attach_to(window)
+        elif (i % 2 == 1):
+            line.color = rectangle2.outline_color
+            line.attach_to(window)
+
+    window.render()
 
 # ----------------------------------------------------------------------
 # Calls  main  to start the ball rolling.
